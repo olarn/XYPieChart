@@ -238,7 +238,10 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
             label = [NSString stringWithFormat:@"%0.0f", layer.percentage*100];
         else
             label = (layer.text)?layer.text:[NSString stringWithFormat:@"%0.0f", layer.value];
-        CGSize size = [label sizeWithFont:self.labelFont];
+        
+        CGSize size = [label sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:self.labelFont.pointSize]}];
+        
+        //CGSize size = [label sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:30.0f]}];
         
         if(M_PI*2*_labelRadius*layer.percentage < MAX(size.width,size.height))
         {
@@ -640,7 +643,11 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
         [textLayer setShadowOpacity:1.0f];
         [textLayer setShadowRadius:2.0f];
     }
-    CGSize size = [@"0" sizeWithFont:self.labelFont];
+    
+    CGSize size = [@"0" sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:self.labelFont.pointSize]}];
+    
+    // CGSize size = [@"0" sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:30.0f]}];
+    
     [CATransaction setDisableActions:YES];
     [textLayer setFrame:CGRectMake(0, 0, size.width, size.height)];
     [textLayer setPosition:CGPointMake(_pieCenter.x + (_labelRadius * cos(0)), _pieCenter.y + (_labelRadius * sin(0)))];
@@ -660,7 +667,11 @@ static CGPathRef CGPathCreateArc(CGPoint center, CGFloat radius, CGFloat startAn
     else
         label = (pieLayer.text)?pieLayer.text:[NSString stringWithFormat:@"%0.0f", value];
     
-    CGSize size = [label sizeWithFont:self.labelFont];
+    // CGSize size = [label sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:30.0f]}];
+    
+    CGSize size = [label sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:self.labelFont.pointSize]}];
+    
+    // CGSize size = [label sizeWithFont:self.labelFont];
     
     [CATransaction setDisableActions:YES];
     if(M_PI*2*_labelRadius*pieLayer.percentage < MAX(size.width,size.height) || value <= 0)
